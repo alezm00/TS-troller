@@ -26,6 +26,7 @@ PORT=3000
 2) connect to the server through Telnet or ssh: `ssh -p 10022 <user>@<host>`
 and run these commands to create and apikey:
 ```
+use <yourVirtualServerID>
 apikeyadd scope=manage lifetime=0
 ```
 this command will return the apikey (unlimited lifetime)
