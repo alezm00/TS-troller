@@ -92,6 +92,7 @@ module.exports = (io) => {
 					return false
 				})
 				if (a) return
+				await new Promise(r => setTimeout(r, 50));	
 			}
 			from.emit('spampoker',{body:[],status:{code:0,message:""}})
 		})
