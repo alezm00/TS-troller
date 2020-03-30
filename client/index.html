@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<title>Teamspeak troller</title>
+	<style>
+		.noselect {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;    
+		}
+	</style>
+</head>
+<body class="bg-dark text-white">
+
+	<div class="flex-column">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand">TS Troll</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav noselect" style="cursor: pointer;">
+					<a class="nav-item nav-link" onclick="sectionChange('home')">Home</a>
+					<a class="nav-item nav-link" onclick="sectionChange('trolls')">Trolls</a>
+					
+					<a class="nav-item nav-link" onclick="renamemyself()">Settings</a>
+
+				</div>
+			</div>
+		</nav>
+		<div class="row mx-auto">
+			<section id="home" class="col-sm-10 col-lg-5 container">
+				<div>
+					<h1>Teamspeak troller</h1>
+					<h5>Needs teamspeak server version ^3.12.0</h5>
+					<br>
+					<p>
+						Website by <a target="_blank" href="https://github.com/alezm00">Alezm</a>
+					</p>
+				</div>
+			</section>
+			<section id="trolls" class="col-sm-10 col-md-10 col-lg-7 container d-none" style="margin-top: 2vh;">
+				<div id="server-selector row">
+					<div class="input-group p-0 col-sm-12 col-lg-4">
+						<select class="custom-select" id="serverlist"></select>
+					</div>
+				</div>
+				<hr class="bg-light text-dark">
+				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="pokespam-tab" data-toggle="tab" href="#pokespam" role="tab" aria-controls="pokespam" aria-selected="pokespam">Poke Spammer</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="mover-tab" data-toggle="tab" href="#mover" role="tab" aria-controls="mover" aria-selected="false">Mover</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">WIP</a>
+					</li>
+				</ul>
+				<hr class="bg-light text-dark">
+
+
+				<!-- POKER -->
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="pokespam" role="tabpanel" aria-labelledby="pokespam-tab">
+						
+						<div class="form-group">
+							<label for="clientlist">Client:</label>
+							<select class="custom-select clientlist-fill" id="pokerclientlist"></select>
+						</div>
+						<div class="row mx-auto">
+							<div class="form-group p-0 col-sm-12 col-lg-4">
+								<label for="count-pokespam">Poke count:</label>
+								<input type="number" class="form-control" id="count-pokespam" value="1" min="1">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="pokermode">Mode:</label>
+							<select class="custom-select" id="pokermode">
+								<option value="text" selected>Text</option>
+								<option value="randomNumbers">Random Numbers</option>
+								<option value="randomchars">Random Chars</option>
+								<option value="randomwordsIT">Random Words ITA</option>
+								<option value="randomwordsEN">Random Words EN</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="pokermodeText">Text:</label>
+							<input type="text" class="form-control" id="pokermodeText" placeholder="Insert text to spampoke" min="1">
+						</div>
+						<br>
+						<button class="btn btn-primary" id="pokerstartbutton" onclick="startPoker()"><span id="pokerspinner" class="spinner-border spinner-border-sm d-none"></span> Start</button>
+					</div>
+
+
+
+					<!-- MOVER -->
+					<div class="tab-pane fade" id="mover" role="tabpanel" aria-labelledby="mover-tab">
+						<div class="form-group">
+							<label for="clientlist">Client:</label>
+							<select class="custom-select clientlist-fill" id="moverclientlist"></select>
+						</div>
+
+						<div class="form-group">
+							<label for="movermode">Mode:</label>
+							<select class="custom-select" id="movermode">
+								<option value="random" selected>Random</option>
+								<option value="carousel">Carousel</option>
+							</select>
+						</div>
+
+						<div class="row mx-auto">
+							<div class="form-group p-0 col-sm-12 col-lg-4">
+								<label for="count-mover">Poke count:</label>
+								<input type="number" class="form-control" id="count-mover" value="1" min="1">
+							</div>
+						</div>
+						<button class="btn btn-primary" id="moverstartbutton" onclick="startMover()"><span id="moverspinner" class="spinner-border spinner-border-sm d-none"></span> Start</button>
+					</div>
+
+
+
+
+
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">WIP</div>
+				</div>
+
+
+
+				
+			</section>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="apihostmodal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-dark">Settings:</h5>
+				</div>
+				<div class="modal-body">
+					<label for="hostinput" class="text-dark">Server link for requests (http(s)://localhost:10080/)</label>
+					<input class="form-control" placeholder="http://localhost:10080/" id="hostinput" type="text">
+					<br>
+					<label for="apikeyinput" class="text-dark">Insert api key (Teamspeak server minimal version: 3.12)</label>
+					<input class="form-control" placeholder="Api-key" id="apikeyinput" type="text">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="saveApikeyHost()">Send</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="renamemyself" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-dark">Settings:</h5>
+				</div>
+				<div class="modal-body">
+					<label for="renamemyselfinput" class="text-dark">New name:</label>
+					<input class="form-control" placeholder="serveradmin" id="renamemyselfinput" type="text">
+					<hr>
+					<button type="button" class="btn btn-danger" onclick="$('#renamemyself').modal('hide');resetapi()">Reset Host/Api</button>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="renamemyselfConfirm()">Send</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row col-lg-5 mx-auto fixed-bottom">
+		<div class="alert alert-success mx-auto d-none font-weight-bold text-success" id="main-message" role="alert">
+			Error loading message :)
+		</div>
+	</div>
+	<div class="row col-lg-5 mx-auto fixed-bottom">
+		<div class="alert alert-danger mx-auto d-none font-weight-bold text-danger" id="main-error" role="alert">
+			Error loading error :)
+		</div>
+	</div>
+	
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		let socket = io('/c');
+	</script>
+	<script src="/js/errorcheck.js"></script>
+	<script src="/js/poke.js"></script>
+	<script src="/js/mover.js"></script>
+	<script src="/js/main.js"></script>
+</body>
+</html>
