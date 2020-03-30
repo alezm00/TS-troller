@@ -4,7 +4,7 @@ function checkerrors(data) {
 		$('#main-error').toggleClass("d-none")
 		setTimeout(() => {
 			$('#main-error').toggleClass("d-none")
-		}, 5000);
+		}, 10000);
 		return true
 	}
 	return false

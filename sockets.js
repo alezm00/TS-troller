@@ -11,7 +11,7 @@ function checkHost(serverhost) {
 	if (!serverhost.endsWith('/')) {
         serverhost = `${serverhost}/`
 	}
-	if (!serverhost.startsWith('http://') || !serverhost.startsWith('https://')) {
+	if (!serverhost.startsWith('http://') && !serverhost.startsWith('https://')) {
 		serverhost = `http://${serverhost}`
 	}
 	return serverhost;
@@ -55,7 +55,7 @@ module.exports = (io) => {
 			})
 		})
 		from.on('spampoker',async (data) => {
-			let {apikey,serverhost,serverid,pokermode,pokercount,pokertext,pokerclient} = data
+			let {apikey,serverhost,serverid,pokermode,pokercount,pokertext,pokerclient,textorpoke} = data
 			console.log(`Pokerspammer started: who:${pokerclient} | ${pokermode} | count: ${pokercount} | text: ${pokertext}`)
 			serverhost = await checkHost(serverhost);
 			if (pokercount > 500) {
@@ -84,7 +84,11 @@ module.exports = (io) => {
 					default:
 						break;
 				}
-				let a = await get(apikey,serverhost,`clientpoke?clid=${pokerclient}&msg=${pokertext}`,serverid).then(data => {
+				let url = `clientpoke?clid=${pokerclient}&msg=${pokertext}`//sendtextmessage targetmode=1 target=542 msg=Hello\sWorld!
+				if (textorpoke == "private") {
+					url = `sendtextmessage?targetmode=1&target=${pokerclient}&msg=${pokertext}`
+				}
+				let a = await get(apikey,serverhost,url,serverid).then(data => {
 					if (data.status.code != 0) {
 						from.emit('spampoker',data)
 						return true

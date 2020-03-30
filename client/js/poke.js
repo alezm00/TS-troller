@@ -9,7 +9,8 @@ function startPoker() { //clientpoke clid={clientID} msg={text}
 		pokermode:$('#pokermode').val(),
 		pokercount:$('#count-pokespam').val(),
 		pokertext:$('#pokermodeText').val(),
-		pokerclient:$('#pokerclientlist').val()
+		pokerclient:$('#pokerclientlist').val(),
+		textorpoke: (document.getElementById('pokeormessage').checked ? "private" : "poke")
 	})
 	socket.on('spampoker',(data) => {
 		checkerrors(data)
