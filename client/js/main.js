@@ -38,13 +38,16 @@ function loadServers() {
 	socket.on('serverlist',(data) => {
 		if (checkerrors(data)) return
 		$('#serverlist').html('')
-		$('#serverlist').append(new Option("Select Server",null,true))
+		$('#serverlist').append(new Option("Select Server","np",true))
 		data.body.forEach(element => {
 			$('#serverlist').append(new Option(`${element.virtualserver_name} | ${element.virtualserver_port}`,element.virtualserver_id))
 		});
 	})
 	$('#serverlist').change(() => {	
-		currentSelectedServer = $('#serverlist').val()
+		let value = $('#serverlist').val()
+		if (value != "np") {
+			currentSelectedServer = value
+		}
 		loadClients()
 	})
 };
