@@ -1,6 +1,5 @@
-let movemode = "random"
-
 function startMover() { //clientpoke clid={clientID} msg={text}
+	if (!$('#moverclientlist').val()) return
 	$('#moverspinner').removeClass('d-none')
 	$('#moverstartbutton').prop('disabled', true);
 	socket.emit('mover',{
@@ -19,6 +18,11 @@ function startMover() { //clientpoke clid={clientID} msg={text}
 }
 
 
-$('#movemode').change(() => {	
-	movemode = $('#movemode').val()
+
+$('#movermode').change(() => {
+	if ($('#movermode').val() == "carousel") {
+		$('#count-mover').prop('disabled',true);
+	} else {
+		$('#count-mover').prop('disabled',false);
+	}
 })

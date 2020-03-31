@@ -1,5 +1,6 @@
 let pokermode = "text"
 function startPoker() { //clientpoke clid={clientID} msg={text}
+	if (!$('#pokerclientlist').val()) return
 	$('#pokerspinner').removeClass('d-none')
 	$('#pokerstartbutton').prop('disabled', true);
 	socket.emit('spampoker',{

@@ -23,5 +23,13 @@ module.exports = (apikey,host,command,serverid = "") => {
         return result.json()
     }).then(result => {
         return result
-    }).catch((err) => {return {"status":{"code":1,"message":err.message}}});
+    }).catch((err) => {
+        return {
+            "status":
+                {
+                    "code":1,
+                    "message":err.message
+                }
+            }
+    });
 }
